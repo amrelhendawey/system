@@ -52,7 +52,7 @@ const SigninComp = () => {
             {/* Center the Sign In Link */}
             <p className="mt-3 text-sm text-center">
             Need an account?{" "}
-              <Link to="/signup" className="text-blue-500 underline">
+              <Link to="/" className="text-blue-500 underline">
               Create one
               </Link>
             </p>
