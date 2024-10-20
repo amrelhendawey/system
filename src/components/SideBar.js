@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
@@ -11,20 +12,22 @@ import Logo from "../images/logo (1).png";
 
 const SideBar = () => {
   const links = [
-    { title: "Dashboard", href: "/dashboard", icon: DashboardIcon },
+    { title: "Dashboard", href: "/MainDashboard", icon: DashboardIcon },
     { title: "Stats", href: "/stats", icon: BarChartIcon },
-    { title: "Documents", href: "/", icon: InsertDriveFileIcon },
-    { title: "Photos", href: "/", icon: InsertPhotoIcon },
-    { title: "Hierarchy", href: "/", icon: CleanHandsIcon },
-    { title: "Message", href: "/", icon: MessageIcon },
-    { title: "Help", href: "/", icon: HelpIcon },
-    { title: "Settings", href: "/", icon: SettingsIcon },
+    { title: "Documents", href: "", icon: InsertDriveFileIcon },
+    { title: "Photos", href: "", icon: InsertPhotoIcon },
+    { title: "Hierarchy", href: "", icon: CleanHandsIcon },
+    { title: "Message", href: "", icon: MessageIcon },
+    { title: "Help", href: "", icon: HelpIcon },
+    { title: "Settings", href: "", icon: SettingsIcon },
   ];
 
   const [activeLink, setActiveLink] = useState("Dashboard");
+  const navigate = useNavigate();
 
-  const handleActiveLink = (value) => {
+  const handleActiveLink = (value ,href) => {
     setActiveLink(value);
+    navigate(href);
   };
 
   return (
@@ -43,7 +46,7 @@ const SideBar = () => {
                 className={`flex w-full items-center mb-4 cursor-pointer ${
                   activeLink === link.title ? "text-blue-500" : "text-gray-500"
                 }`}
-                onClick={() => handleActiveLink(link.title)}
+                onClick={() => handleActiveLink(link.title ,link.href)}
               >
                 <link.icon
                   sx={{

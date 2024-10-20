@@ -10,7 +10,7 @@ const MainDashboard = () => {
       <SideBar />
       <div className="w-full flex flex-col justify-between items-center p-10 space-y-5">
         <Nav />
-        <SearchUsers />
+        <SearchUsers title={"Admin Dashboard"} />
         <ListUsers />
       </div>
     </div>
