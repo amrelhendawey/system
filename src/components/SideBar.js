@@ -1,12 +1,24 @@
 import React, { useState } from "react";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import UserIcon from "@mui/icons-material/Person";
-import Logo from "../images/logo (1).png"
+import BarChartIcon from "@mui/icons-material/BarChart";
+import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
+import CleanHandsIcon from "@mui/icons-material/CleanHands";
+import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
+import MessageIcon from "@mui/icons-material/Message";
+import HelpIcon from "@mui/icons-material/Help";
+import SettingsIcon from "@mui/icons-material/Settings";
+import Logo from "../images/logo (1).png";
 
 const SideBar = () => {
   const links = [
     { title: "Dashboard", href: "/dashboard", icon: DashboardIcon },
-    { title: "Users", href: "/users", icon: UserIcon },
+    { title: "Stats", href: "/stats", icon: BarChartIcon },
+    { title: "Documents", href: "/", icon: InsertDriveFileIcon },
+    { title: "Photos", href: "/", icon: InsertPhotoIcon },
+    { title: "Hierarchy", href: "/", icon: CleanHandsIcon },
+    { title: "Message", href: "/", icon: MessageIcon },
+    { title: "Help", href: "/", icon: HelpIcon },
+    { title: "Settings", href: "/", icon: SettingsIcon },
   ];
 
   const [activeLink, setActiveLink] = useState("Dashboard");
@@ -15,7 +27,6 @@ const SideBar = () => {
     setActiveLink(value);
   };
 
-
   return (
     <div className="w-72 min-h-screen shadow-2xl rounded-3xl space-y-8">
       {/* LOGO HERE */}
@@ -23,12 +34,18 @@ const SideBar = () => {
         <img src={Logo} />
       </div>
       {/* Links here  */}
-      <div className="w-full flex flex-col justify-center items-center text-xl font-medium">
+      <div className="w-full flex flex-col justify-center items-center text-xl font-medium  space-y-4">
         {links.map((link, index) => (
-          <ul className="w-full flex items-center justify-start pl-12 ">
+          <ul className="w-full flex items-center justify-start pl-12">
             <a>
-              <li key={index} className={`flex w-full items-center mb-4 cursor-pointer ${activeLink === link.title ? "text-blue-500" : "text-black"}`} onClick={() => handleActiveLink(link.title)}>
-                <link.icon  
+              <li
+                key={index}
+                className={`flex w-full items-center mb-4 cursor-pointer ${
+                  activeLink === link.title ? "text-blue-500" : "text-gray-500"
+                }`}
+                onClick={() => handleActiveLink(link.title)}
+              >
+                <link.icon
                   sx={{
                     fontSize: 30,
                     justifySelf: "flex-start",

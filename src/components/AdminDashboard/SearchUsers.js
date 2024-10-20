@@ -6,7 +6,7 @@ import SearchIcon from "@mui/icons-material/Search";
 const SearchUsers = () => {
   return (
     <div className="w-full flex flex-col justify-center items-start space-y-4">
-      <h1 className="text-2xl font-semibold text-blue-500">Users Dashboard</h1>
+      <h1 className="text-2xl font-semibold text-blue-500">Admin Dashboard</h1>
       {/* SEARCH USERS */}
       <div className="w-full flex items-center justify-between space-x-4">
         {/* SEARCH INPUT */}
