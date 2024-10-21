@@ -33,11 +33,84 @@ const ListUsers = () => {
       gender: "female",
     },
     {
-      id: 5,
+      id: 6,
       username: "user5",
       password: "pass5",
       email: "email5",
       gender: "female",
+      
+    },
+    {
+      id: 7,
+      username: "user5",
+      password: "pass5",
+      email: "email5",
+      gender: "female",
+      
+    },
+    {
+      id: 8,
+      username: "user5",
+      password: "pass5",
+      email: "email5",
+      gender: "female",
+      
+    },
+    {
+      id: 9,
+      username: "user5",
+      password: "pass5",
+      email: "email5",
+      gender: "female",
+      
+    },
+    {
+      id: 10,
+      username: "user5",
+      password: "pass5",
+      email: "email5",
+      gender: "female",
+      
+    },
+    {
+      id: 11,
+      username: "user5",
+      password: "pass5",
+      email: "email5",
+      gender: "female",
+      
+    },
+    {
+      id: 12,
+      username: "user5",
+      password: "pass5",
+      email: "email5",
+      gender: "female",
+      
+    },
+    {
+      id: 13,
+      username: "user5",
+      password: "pass5",
+      email: "email5",
+      gender: "female",
+      
+    },
+    {
+      id: 14,
+      username: "user5",
+      password: "pass5",
+      email: "email5",
+      gender: "female",
+      
+    },
+    {
+      id: 15,
+      username: "user5",
+      password: "pass5",
+      email: "email5",
+      gender: "female",
+      
     },
     
   ]);
@@ -174,7 +247,6 @@ const ListUsers = () => {
                 >
                   <option value="male">Male</option>
                   <option value="female">Female</option>
-                  <option value="other">Other</option>
                 </select>
               </div>
               <div className="modal-action mt-4">
