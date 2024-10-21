@@ -15,7 +15,7 @@ const SinginUser = () => {
     e.preventDefault(); // Prevent form submission
 
     // API endpoint to validate the user
-    const apiUrl = "http://localhost/check.php"; // Change this to your PHP script path
+    const apiUrl = "http://localhost/MyPHPWebsite/api/check.php"; // Change this to your PHP script path
 
     try {
       const response = await fetch(apiUrl, {

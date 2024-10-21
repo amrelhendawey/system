@@ -15,7 +15,7 @@ const SigninComp = () => {
     e.preventDefault(); // Prevent form submission
 
     // API endpoint to validate the user
-    const apiUrl = "http://localhost/check.php"; // Change this to your PHP script path
+    const apiUrl = "http://localhost/MyPHPWebsite/api/check.php"; // Correct API path to your PHP script
 
     try {
       const response = await fetch(apiUrl, {
@@ -32,7 +32,7 @@ const SigninComp = () => {
         // Assuming your API returns { success: true } on correct credentials
         navigate("/mainDashboard"); // Redirect to the desired component
       } else {
-        setError("Invalid email or password."); // Set error message
+        setError(data.message); // Set error message from server response
       }
     } catch (error) {
       console.error("Error:", error);
@@ -55,15 +55,11 @@ const SigninComp = () => {
             <p className="text-gray-500 text-sm mb-3">
               Please login to continue to your account.
             </p>
-            {error && <p className="text-red-500 mb-3">{error}</p>}{" "}
-            {/* Display error message */}
+            {error && <p className="text-red-500 mb-3">{error}</p>} {/* Display error message */}
             {/* Form */}
             <form className="space-y-5" onSubmit={handleSubmit}>
               <div className="mb-2">
-                <label
-                  className="block text-sm font-medium ml-2"
-                  htmlFor="email"
-                >
+                <label className="block text-sm font-medium ml-2" htmlFor="email">
                   Email
                 </label>
                 <input
@@ -75,10 +71,7 @@ const SigninComp = () => {
                 />
               </div>
               <div className="mb-3">
-                <label
-                  className="block text-sm font-medium ml-2"
-                  htmlFor="password"
-                >
+                <label className="block text-sm font-medium ml-2" htmlFor="password">
                   Password
                 </label>
 
