@@ -178,7 +178,7 @@ const ListUsers = () => {
                 </select>
               </div>
               <div className="modal-action mt-4">
-                <button type="submit" className="btn btn-primary">Save</button>
+                <button type="submit" className="btn btn-primary bg-blue-500 text-white hover:bg-blue-600">Save</button>
                 <button
                   type="button"
                   className="btn"

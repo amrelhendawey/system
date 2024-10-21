@@ -113,7 +113,7 @@ const ListUsersChat= () => {
           className="fixed inset-0 z-[100] flex items-center justify-center bg-black bg-opacity-50"
           style={{ zIndex: 100 }} // Ensure it sits above everything
         >
-          <div className="modal-box relative z-[110] bg-white p-4 rounded shadow-lg">
+          <div className="modal-box relative z-[110] bg-white p-6 rounded-lg shadow-lg">
             {/* Close "×" icon */}
             <button
               className="absolute top-2 right-2 text-gray-600 hover:text-black text-2xl"
