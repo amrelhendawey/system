@@ -2,11 +2,13 @@ import React from "react";
 import Signupimage from "../../images/sign up.png";
 import logo from "../../images/Logo.png";
 import { Link } from "react-router-dom";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import PersonIcon from "@mui/icons-material/Person";
 
 const SignupComp = () => {
   return (
     <div className="signin-form w-full h-full flex justify-center items-center">
-      <div className="flex  justify-center items-center max-w-[80%] h-screen shadow-2xl relative">
+      <div className="flex w-full justify-center items-center max-w-[80%] h-screen shadow-2xl relative">
         {/* Logo */}
         <div className="absolute top-4 left-4">
           <img src={logo} alt="Logo" className="h-6" />
@@ -19,7 +21,7 @@ const SignupComp = () => {
           <div className="w-4/5">
             {" "}
             {/* Ensure form width is consistent */}
-            <h2 className="text-4xl font-bold mb-3">Sign up</h2>
+            <h2 className="text-4xl font-bold mb-3">Sign up as User</h2>
             <p className="text-gray-500 text-sm mb-3">
               Sign up to enjoy the features of Revolutie
             </p>
@@ -73,6 +75,15 @@ const SignupComp = () => {
                 Sign in
               </Link>
             </p>
+              {/* SWITCH ICONS */}
+              <div className="flex justify-center items-center space-x-7 mt-3">
+              <Link to={"/"} className="text-blue-500 bg-gray-200 w-10 h-10 flex justify-center items-center rounded-full hover:text-blue-600">
+                <AdminPanelSettingsIcon style={{ fontSize: "35px" }} />
+              </Link>
+              <Link to={"/SigninUser"} className="text-blue-500 bg-gray-200 w-10 h-10 flex justify-center items-center rounded-full hover:text-blue-600">
+                <PersonIcon style={{ fontSize: "35px" }} />
+              </Link>
+            </div>
           </div>
         </div>
 

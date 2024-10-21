@@ -4,14 +4,14 @@ import ListUsersChat from "./ListUsersChat";
 import SideBar from "../SideBar";
 import Nav from "../AdminDashboard/Nav";
 
-const Messages = () => {
+const Messages = ({adminData}) => {
   return (
     <div className="px-1 font-Poppins flex w-full justify-center ">
       <SideBar />
       <div className="w-full flex flex-col justify-between items-center p-10 space-y-5">
         <Nav />
         <SearchUsers title={"Messages"} />
-        <ListUsersChat />
+        <ListUsersChat adminData={adminData}/>
       </div>
     </div>
   );

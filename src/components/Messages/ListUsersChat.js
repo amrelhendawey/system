@@ -1,70 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import MessageIcon from "@mui/icons-material/Message";
 
-const ListUsersChat= () => {
-  const [users] = useState([
-    {
-      id: 1,
-      username: "user1",
-      password: "pass1",
-      email: "email1",
-      gender: "male",
-    },
-    {
-      id: 2,
-      username: "user2",
-      password: "pass2",
-      email: "email2",
-      gender: "female",
-    },
-    {
-      id: 3,
-      username: "user3",
-      password: "pass3",
-      email: "email3",
-      gender: "male",
-    },
-    {
-      id: 4,
-      username: "user4",
-      password: "pass4",
-      email: "email4",
-      gender: "female",
-    },
-    {
-      id: 5,
-      username: "user5",
-      password: "pass5",
-      email: "email5",
-      gender: "female",
-    },
-  ]);
-
+const ListUsersChat = ({ adminData }) => {
   const [isChatOpen, setIsChatOpen] = useState(false); // Chat modal visibility
-  const [activeUser, setActiveUser] = useState(null);  // Selected user for chat
-  const [messages, setMessages] = useState([]);        // Messages for chat
-  const [input, setInput] = useState('');              // Input field value
+  const [activeUser, setActiveUser] = useState(null); // Selected user for chat
+  const [messages, setMessages] = useState([]); // Messages for chat
+  const [input, setInput] = useState(""); // Input field value
 
   // Open chat for a specific user
   const openChat = (user) => {
     setActiveUser(user);
     setMessages([]); // Reset chat for the selected user
     setIsChatOpen(true);
-    document.body.style.overflow = 'hidden'; // Prevent background scroll
+    document.body.style.overflow = "hidden"; // Prevent background scroll
   };
 
   // Close chat modal
   const closeChat = () => {
     setIsChatOpen(false);
     setActiveUser(null);
-    document.body.style.overflow = 'auto'; // Restore scroll
+    document.body.style.overflow = "auto"; // Restore scroll
   };
 
   // Send message
   const sendMessage = () => {
     if (input.trim()) {
       setMessages([...messages, input]);
-      setInput('');
+      setInput("");
     }
   };
 
@@ -75,36 +37,45 @@ const ListUsersChat= () => {
       </div>
 
       <div className="overflow-x-auto w-full z-20">
-        <table className="table border-separate border-spacing-0 z-20">
-          {/* head */}
-          <thead className="text-xl text-center shadow-md z-20">
-            <tr>
-              <th></th>
-              <th className="font-medium">Username</th>
-              <th className="font-medium">Password</th>
-              <th className="font-medium">Email</th>
-              <th className="font-medium">Gender</th>
-              <th className="font-medium">Action</th>
-            </tr>
-          </thead>
-          <tbody className="w-full z-20">
-            {users.map((user, index) => (
-              <tr className="w-full text-center text-[16px] font-normal space-y-3 z-20" key={index}>
-                <th>{user.id}</th>
-                <td>{user.username}</td>
-                <td>{user.password}</td>
-                <td>{user.email}</td>
-                <td>{user.gender}</td>
-                <td className="flex justify-center space-x-4">
-                  <MessageIcon
-                    className="cursor-pointer text-gray-500 hover:text-blue-500 z-20"
-                    onClick={() => openChat(user)} // Open chat when clicked
-                  />
-                </td>
+        <div className="max-h-[57vh]">
+          <table className="table border-separate border-spacing-0 z-20">
+            {/* head */}
+            <thead className="text-xl text-center shadow-md z-20">
+              <tr>
+                <th className="sticky top-0 bg-slate-50"></th>
+                <th className="font-medium sticky top-0 bg-slate-50">
+                  Username
+                </th>
+                <th className="font-medium sticky top-0 bg-slate-50">
+                  Password
+                </th>
+                <th className="font-medium sticky top-0 bg-slate-50">Email</th>
+                <th className="font-medium sticky top-0 bg-slate-50">Gender</th>
+                <th className="font-medium sticky top-0 bg-slate-50">Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="w-full z-20">
+              {adminData.map((user, index) => (
+                <tr
+                  className="w-full text-center text-[16px] font-normal space-y-3 z-20"
+                  key={index}
+                >
+                  <th>{user.id}</th>
+                  <td>{user.username}</td>
+                  <td>{user.password}</td>
+                  <td>{user.email}</td>
+                  <td>{user.gender}</td>
+                  <td className="flex justify-center space-x-4">
+                    <MessageIcon
+                      className="cursor-pointer text-gray-500 hover:text-blue-500 z-20"
+                      onClick={() => openChat(user)} // Open chat when clicked
+                    />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       {/* Chat Modal */}
@@ -122,7 +93,9 @@ const ListUsersChat= () => {
               &times;
             </button>
 
-            <h3 className="font-bold text-lg">Chat with {activeUser.username}</h3>
+            <h3 className="font-bold text-lg">
+              Chat with {activeUser.username}
+            </h3>
 
             {/* Chat interface */}
             <div className="flex flex-col h-64 p-4">
@@ -145,7 +118,10 @@ const ListUsersChat= () => {
                   placeholder="Type a message"
                   className="input input-bordered w-full mr-2"
                 />
-                <button onClick={sendMessage} className="btn btn-primary bg-blue-500 text-white hover:bg-blue-600">
+                <button
+                  onClick={sendMessage}
+                  className="btn btn-primary bg-blue-500 text-white hover:bg-blue-600"
+                >
                   Send
                 </button>
               </div>
