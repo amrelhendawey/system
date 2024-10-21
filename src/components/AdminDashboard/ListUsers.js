@@ -1,124 +1,31 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 const ListUsers = () => {
-  const [users, setUsers] = useState([
-    {
-      id: 1,
-      username: "user1",
-      password: "pass1",
-      email: "email1",
-      gender: "male",
-    },
-    {
-      id: 2,
-      username: "user2",
-      password: "pass2",
-      email: "email2",
-      gender: "female",
-    },
-    {
-      id: 3,
-      username: "user3",
-      password: "pass3",
-      email: "email3",
-      gender: "male",
-    },
-    {
-      id: 4,
-      username: "user4",
-      password: "pass4",
-      email: "email4",
-      gender: "female",
-    },
-    {
-      id: 6,
-      username: "user5",
-      password: "pass5",
-      email: "email5",
-      gender: "female",
-      
-    },
-    {
-      id: 7,
-      username: "user5",
-      password: "pass5",
-      email: "email5",
-      gender: "female",
-      
-    },
-    {
-      id: 8,
-      username: "user5",
-      password: "pass5",
-      email: "email5",
-      gender: "female",
-      
-    },
-    {
-      id: 9,
-      username: "user5",
-      password: "pass5",
-      email: "email5",
-      gender: "female",
-      
-    },
-    {
-      id: 10,
-      username: "user5",
-      password: "pass5",
-      email: "email5",
-      gender: "female",
-      
-    },
-    {
-      id: 11,
-      username: "user5",
-      password: "pass5",
-      email: "email5",
-      gender: "female",
-      
-    },
-    {
-      id: 12,
-      username: "user5",
-      password: "pass5",
-      email: "email5",
-      gender: "female",
-      
-    },
-    {
-      id: 13,
-      username: "user5",
-      password: "pass5",
-      email: "email5",
-      gender: "female",
-      
-    },
-    {
-      id: 14,
-      username: "user5",
-      password: "pass5",
-      email: "email5",
-      gender: "female",
-      
-    },
-    {
-      id: 15,
-      username: "user5",
-      password: "pass5",
-      email: "email5",
-      gender: "female",
-      
-    },
-    
-  ]);
-
+  const [users, setUsers] = useState([]); // State to store users
   const [selectedUser, setSelectedUser] = useState(null);
   const [formData, setFormData] = useState({ username: '', email: '', gender: '' });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showModalAnimation, setShowModalAnimation] = useState(false);
+  const [loading, setLoading] = useState(true); // State to manage loading
+  const [error, setError] = useState(null); // State for error handling
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get('http://your-server/api/get_users.php'); // Adjust the URL
+        setUsers(response.data); // Update users state with the fetched data
+      } catch (error) {
+        setError(error.message); // Set error message if fetching fails
+      } finally {
+        setLoading(false); // Stop loading
+      }
+    };
+
+    fetchUsers();
+  }, []);
 
   const handleEditClick = (user) => {
     setSelectedUser(user);
@@ -138,20 +45,36 @@ const ListUsers = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setUsers((prevUsers) =>
-      prevUsers.map((user) =>
-        user.id === selectedUser.id ? { ...user, ...formData } : user
-      )
-    );
+
+    // Here you would typically also update the user on the backend
+    try {
+      await axios.put(`http://your-server/api/update_user.php`, {
+        id: selectedUser.id,
+        ...formData,
+      });
+      setUsers((prevUsers) =>
+        prevUsers.map((user) =>
+          user.id === selectedUser.id ? { ...user, ...formData } : user
+        )
+      );
+    } catch (error) {
+      setError(error.message); // Handle error while updating
+    }
+
     setShowModalAnimation(false); // Hide the modal with animation
     setTimeout(() => setIsModalOpen(false), 300); // Delay to match animation time
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this user?')) {
-      setUsers(users.filter((user) => user.id !== id));
+      try {
+        await axios.delete(`http://your-server/api/delete_user.php?id=${id}`); // Adjust the URL
+        setUsers(users.filter((user) => user.id !== id));
+      } catch (error) {
+        setError(error.message); // Handle error while deleting
+      }
     }
   };
 
@@ -161,42 +84,47 @@ const ListUsers = () => {
         <h1 className="text-xl font-semibold">List Users</h1>
       </div>
 
-      <div className="overflow-x-auto w-full ">
-        <table className="table border-separate border-spacing-0">
-          {/* head */}
-          <thead className="text-xl text-center shadow-md">
-            <tr>
-              <th></th>
-              <th className="font-medium">Username</th>
-              <th className="font-medium">Password</th>
-              <th className="font-medium">Email</th>
-              <th className="font-medium">Gender</th>
-              <th className="font-medium">Action</th>
-            </tr>
-          </thead>
-          <tbody className="w-full ">
-            {users.map((user, index) => (
-              <tr className="w-full text-center text-[16px] font-normal space-y-3" key={index}>
-                <th>{user.id}</th>
-                <td>{user.username}</td>
-                <td>{user.password}</td>
-                <td>{user.email}</td>
-                <td>{user.gender}</td>
-                <td className="flex justify-center space-x-4">
-                  <EditIcon 
-                    onClick={() => handleEditClick(user)} 
-                    className="cursor-pointer text-gray-500 hover:text-blue-500" 
-                  />
-                  <DeleteIcon 
-                    onClick={() => handleDelete(user.id)} 
-                    className="cursor-pointer text-gray-500 hover:text-red-500" 
-                  />
-                </td>
+      {loading ? (
+        <div>Loading...</div>
+      ) : error ? (
+        <div>Error: {error}</div>
+      ) : (
+        <div className="overflow-x-auto w-full ">
+          <table className="table border-separate border-spacing-0">
+            <thead className="text-xl text-center shadow-md">
+              <tr>
+                <th>ID</th>
+                <th className="font-medium">Username</th>
+                <th className="font-medium">Password</th>
+                <th className="font-medium">Email</th>
+                <th className="font-medium">Gender</th>
+                <th className="font-medium">Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody className="w-full ">
+              {users.map((user) => (
+                <tr className="w-full text-center text-[16px] font-normal space-y-3" key={user.id}>
+                  <th>{user.id}</th>
+                  <td>{user.username}</td>
+                  <td>{user.password}</td>
+                  <td>{user.email}</td>
+                  <td>{user.gender}</td>
+                  <td className="flex justify-center space-x-4">
+                    <EditIcon 
+                      onClick={() => handleEditClick(user)} 
+                      className="cursor-pointer text-gray-500 hover:text-blue-500" 
+                    />
+                    <DeleteIcon 
+                      onClick={() => handleDelete(user.id)} 
+                      className="cursor-pointer text-gray-500 hover:text-red-500" 
+                    />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
 
       {/* Modal with animations */}
       {isModalOpen && (
