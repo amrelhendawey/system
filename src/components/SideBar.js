@@ -17,7 +17,7 @@ const SideBar = () => {
     { title: "Documents", href: "", icon: InsertDriveFileIcon },
     { title: "Photos", href: "", icon: InsertPhotoIcon },
     { title: "Hierarchy", href: "", icon: CleanHandsIcon },
-    { title: "Message", href: "", icon: MessageIcon },
+    { title: "Message", href: "/message", icon: MessageIcon },
     { title: "Help", href: "", icon: HelpIcon },
     { title: "Settings", href: "", icon: SettingsIcon },
   ];

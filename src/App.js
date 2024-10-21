@@ -6,6 +6,7 @@ import SignupComp from "./components/signingForms/SignupComp";
 import MainDashboard from "./components/AdminDashboard/MainDashboard";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Stats from "./components/Stats/Stats";
+import Messages from "./components/Messages/Messages";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/mainDashboard" element={<MainDashboard />} />
           <Route path="/SigninUser" element={<SinginUser />} />
           <Route path="/stats" element={<Stats />} />
+          <Route path="/message" element={<Messages />} />
         </Routes>
       </Router>
     </div>
