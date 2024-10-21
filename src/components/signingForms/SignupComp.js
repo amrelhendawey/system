@@ -1,6 +1,6 @@
 import React from "react";
-import Signupimage from "../images/sign up.png";
-import logo from "../images/Logo.png";
+import Signupimage from "../../images/sign up.png";
+import logo from "../../images/Logo.png";
 import { Link } from "react-router-dom";
 
 const SignupComp = () => {

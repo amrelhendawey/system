@@ -3,14 +3,14 @@ import AddIcon from "@mui/icons-material/Add";
 import TuneIcon from "@mui/icons-material/Tune";
 import SearchIcon from "@mui/icons-material/Search";
 
-const SearchUsers = () => {
+const SearchUsers = ({ title }) => {
   return (
     <div className="w-full flex flex-col justify-center items-start space-y-4">
-      <h1 className="text-2xl font-semibold text-blue-500">Users Dashboard</h1>
+      <h1 className="text-2xl font-semibold text-blue-500">{title} </h1>
       {/* SEARCH USERS */}
       <div className="w-full flex items-center justify-between space-x-4">
         {/* SEARCH INPUT */}
-        <div className="relative w-full max-w-3xl">
+        <div className="relative w-full max-w-7xl">
           <input
             type="text"
             placeholder="Search"

@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import Signinimage from "../images/sign in.png";
-import logo from "../images/Logo.png";
+import userImg from "../../images/useimg1.jpg";
+import logo from "../../images/Logo.png";
 import { Link, useNavigate } from "react-router-dom";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import PersonIcon from "@mui/icons-material/Person";
 
-const SigninComp = () => {
+const SinginUser = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(""); // To hold error messages
@@ -37,10 +39,9 @@ const SigninComp = () => {
       setError("Something went wrong. Please try again.");
     }
   };
-
   return (
     <div className="signin-form w-full h-full flex justify-center items-center">
-      <div className="flex justify-center items-center max-w-[80%] h-screen shadow-2xl relative">
+      <div className="flex justify-center items-center max-w-[80%] w-[1280px] h-screen shadow-2xl relative">
         {/* Logo */}
         <div className="absolute top-4 left-4">
           <img src={logo} alt="Logo" className="h-6" />
@@ -49,7 +50,7 @@ const SigninComp = () => {
         {/* Left Section: Form */}
         <div className="w-3/5 flex flex-col justify-center pl-24 pr-6">
           <div className="w-4/5">
-            <h2 className="text-4xl font-bold mb-3">Sign in</h2>
+            <h2 className="text-4xl font-bold mb-3">Sign in as User</h2>
             <p className="text-gray-500 text-sm mb-3">
               Please login to continue to your account.
             </p>
@@ -79,6 +80,7 @@ const SigninComp = () => {
                 >
                   Password
                 </label>
+
                 <input
                   type="password"
                   placeholder="Password"
@@ -87,7 +89,7 @@ const SigninComp = () => {
                   onChange={(e) => setPassword(e.target.value)} // Capture password
                 />
               </div>
-              <button className="btn bg-blue-500 hover:bg-blue-600 text-white w-full py-1.5 text-sm rounded-2xl">
+              <button className="btn bg-[#36719d] hover:bg-[#316489] text-white w-full py-1.5 text-sm rounded-2xl">
                 Sign in
               </button>
             </form>
@@ -98,13 +100,28 @@ const SigninComp = () => {
                 Create one
               </Link>
             </p>
+            {/* SWITCH ICONS */}
+            <div className="flex justify-center items-center space-x-7 mt-3">
+              <Link
+                to={"/"}
+                className="text-[#36719d] bg-gray-200 w-10 h-10 flex justify-center items-center rounded-full hover:text-[#316489]"
+              >
+                <AdminPanelSettingsIcon style={{ fontSize: "35px" }} />
+              </Link>
+              <Link
+                to="/signinUser"
+                className="text-[#36719d] bg-gray-200 w-10 h-10 flex justify-center items-center rounded-full hover:text-[#316489]"
+              >
+                <PersonIcon style={{ fontSize: "35px" }} />
+              </Link>
+            </div>
           </div>
         </div>
 
         {/* Right Section: Image with padding and rounded corners */}
         <div className="w-2/5 p-3 pr-3 h-full">
           <img
-            src={Signinimage}
+            src={userImg}
             alt="Signin"
             className="object-cover w-full h-full rounded-lg"
           />
@@ -114,4 +131,4 @@ const SigninComp = () => {
   );
 };
 
-export default SigninComp;
+export default SinginUser;
