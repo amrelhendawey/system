@@ -1,49 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MessageIcon from "@mui/icons-material/Message";
+import axios from 'axios';
 
-const ListUsersChat= () => {
-  const [users] = useState([
-    {
-      id: 1,
-      username: "user1",
-      password: "pass1",
-      email: "email1",
-      gender: "male",
-    },
-    {
-      id: 2,
-      username: "user2",
-      password: "pass2",
-      email: "email2",
-      gender: "female",
-    },
-    {
-      id: 3,
-      username: "user3",
-      password: "pass3",
-      email: "email3",
-      gender: "male",
-    },
-    {
-      id: 4,
-      username: "user4",
-      password: "pass4",
-      email: "email4",
-      gender: "female",
-    },
-    {
-      id: 5,
-      username: "user5",
-      password: "pass5",
-      email: "email5",
-      gender: "female",
-    },
-  ]);
-
+const ListUsersChat = () => {
+  const [users, setUsers] = useState([]); // State to hold the list of users
   const [isChatOpen, setIsChatOpen] = useState(false); // Chat modal visibility
   const [activeUser, setActiveUser] = useState(null);  // Selected user for chat
   const [messages, setMessages] = useState([]);        // Messages for chat
   const [input, setInput] = useState('');              // Input field value
+
+  // Fetch users from the API on component mount
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get('http://localhost/MyPHPWebsite/api/read.php');
+        setUsers(response.data); // Assume your read.php returns a JSON array of users
+      } catch (error) {
+        console.error('Error fetching users:', error);
+      }
+    };
+    
+    fetchUsers();
+  }, []);
 
   // Open chat for a specific user
   const openChat = (user) => {
@@ -88,8 +66,8 @@ const ListUsersChat= () => {
             </tr>
           </thead>
           <tbody className="w-full z-20">
-            {users.map((user, index) => (
-              <tr className="w-full text-center text-[16px] font-normal space-y-3 z-20" key={index}>
+            {users.map((user) => (
+              <tr className="w-full text-center text-[16px] font-normal space-y-3 z-20" key={user.id}>
                 <th>{user.id}</th>
                 <td>{user.username}</td>
                 <td>{user.password}</td>
