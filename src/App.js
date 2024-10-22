@@ -7,7 +7,6 @@ import MainDashboard from "./components/AdminDashboard/MainDashboard";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Stats from "./components/Stats/Stats";
 import Messages from "./components/Messages/Messages";
-
 function App() {
   return (
     <div className="font-Poppins">

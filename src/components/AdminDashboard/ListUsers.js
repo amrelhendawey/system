@@ -10,31 +10,33 @@ const ListUsers = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [showModalAnimation, setShowModalAnimation] = useState(false);
 
-    // Fetch users from the API on component mount
+    // Fetch users from the API when component mounts
     useEffect(() => {
         const fetchUsers = async () => {
             try {
                 const response = await axios.get('http://localhost/MyPHPWebsite/api/read.php');
-                setUsers(response.data); // Assume your read.php returns a JSON array of users
+                setUsers(response.data); // Assuming your API returns a JSON array of users
             } catch (error) {
                 console.error('Error fetching users:', error);
             }
         };
-        
+
         fetchUsers();
     }, []);
 
+    // Handle edit user action
     const handleEditClick = (user) => {
-        setSelectedUser(user);
+        setSelectedUser(user); // Set the user to be edited
         setFormData({
             username: user.username,
             email: user.email,
             gender: user.gender,
         });
-        setIsModalOpen(true);
-        setTimeout(() => setShowModalAnimation(true), 50); // Delay to trigger the animation
+        setIsModalOpen(true); // Open modal
+        setTimeout(() => setShowModalAnimation(true), 50); // Delay to trigger animation
     };
 
+    // Handle form field change
     const handleInputChange = (e) => {
         setFormData({
             ...formData,
@@ -42,42 +44,44 @@ const ListUsers = () => {
         });
     };
 
+    // Handle form submission for updating user
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
             // Send update request to API
-            const response = await axios.post('http://localhost/MyPHPWebsite/api/update.php', `id=${selectedUser.id}&username=${formData.username}&email=${formData.email}&gender=${formData.gender}`, {
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-            });
+            await axios.post(
+                'http://localhost/MyPHPWebsite/api/update.php',
+                `id=${selectedUser.id}&username=${formData.username}&email=${formData.email}&gender=${formData.gender}`,
+                { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
+            );
 
-            console.log(response.data.message); // Log success message
-
-            // Update local state to reflect changes
+            // Update the user in the local state
             setUsers(prevUsers =>
                 prevUsers.map(user =>
                     user.id === selectedUser.id ? { ...user, ...formData } : user
                 )
             );
 
-            setShowModalAnimation(false); // Hide the modal with animation
-            setTimeout(() => setIsModalOpen(false), 300); // Delay to match animation time
+            // Close the modal after animation
+            setShowModalAnimation(false);
+            setTimeout(() => setIsModalOpen(false), 300);
         } catch (error) {
             console.error('Error updating user:', error);
         }
     };
 
+    // Handle delete user action
     const handleDelete = async (id) => {
         try {
-            const response = await axios.post('http://localhost/MyPHPWebsite/api/delete.php', `id=${id}`, {
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-            });
-            console.log(response.data.message); // Log success message
-            setUsers(users.filter(user => user.id !== id)); // Update local state
+            await axios.post(
+                'http://localhost/MyPHPWebsite/api/delete.php',
+                `id=${id}`,
+                { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
+            );
+
+            // Remove the user from the local state
+            setUsers(users.filter(user => user.id !== id));
         } catch (error) {
             console.error('Error deleting user:', error);
         }
@@ -89,7 +93,8 @@ const ListUsers = () => {
                 <h1 className="text-xl font-semibold">List Users</h1>
             </div>
 
-            <div className="overflow-x-auto w-full ">
+            {/* User Table */}
+            <div className="overflow-x-auto w-full">
                 <table className="table border-separate border-spacing-0">
                     <thead className="text-xl text-center shadow-md">
                         <tr>
@@ -101,8 +106,8 @@ const ListUsers = () => {
                             <th className="font-medium">Action</th>
                         </tr>
                     </thead>
-                    <tbody className="w-full ">
-                        {users.map((user) => (
+                    <tbody className="w-full">
+                        {users.map(user => (
                             <tr className="w-full text-center text-[16px] font-normal space-y-3" key={user.id}>
                                 <th>{user.id}</th>
                                 <td>{user.username}</td>
@@ -119,7 +124,7 @@ const ListUsers = () => {
                 </table>
             </div>
 
-            {/* Modal with animations */}
+            {/* Modal for editing user */}
             {isModalOpen && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
                     <div className={`modal-box relative bg-white p-6 rounded-lg shadow-lg transition-all duration-300 ease-out ${showModalAnimation ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
@@ -129,7 +134,7 @@ const ListUsers = () => {
                                 className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                                 onClick={() => {
                                     setShowModalAnimation(false);
-                                    setTimeout(() => setIsModalOpen(false), 300); // Close with animation
+                                    setTimeout(() => setIsModalOpen(false), 300);
                                 }}
                             >
                                 ✕
