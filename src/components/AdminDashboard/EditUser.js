@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const AddUser = ({ onClose, onAddSuccess }) => {
+const EditUser = ({ userId, onClose, onEditSuccess }) => {
     const [formData, setFormData] = useState({
         username: '',
         password: '',
@@ -9,33 +9,38 @@ const AddUser = ({ onClose, onAddSuccess }) => {
         gender: '',
     });
 
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const response = await axios.get(`http://localhost/MyPHPWebsite/api/readUser.php?id=${userId}`);
+                setFormData(response.data);
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+            }
+        };
+        fetchUser();
+    }, [userId]);
+
     const handleInputChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleAddSubmit = async (e) => {
+    const handleEditSubmit = async (e) => {
         e.preventDefault();
-        console.log('Submitting:', formData); // Log the form data
         try {
-            const response = await axios.post('http://localhost/MyPHPWebsite/api/create.php', formData, {
-                headers: {
-                    'Content-Type': 'application/json' // Specify the content type
-                }
-            });
-            console.log('Response:', response.data); // Log the response from the API
-            onAddSuccess();
+            await axios.post('http://localhost/MyPHPWebsite/api/update.php', formData);
+            onEditSuccess();
             onClose();
         } catch (error) {
-            console.error('Error adding user:', error.response ? error.response.data : error.message);
+            console.error('Error updating user:', error);
         }
     };
-    
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
             <div className="modal-box relative bg-white p-6 rounded-lg shadow-lg">
-                <h3 className="font-bold text-lg">Add New User</h3>
-                <form onSubmit={handleAddSubmit}>
+                <h3 className="font-bold text-lg">Edit User</h3>
+                <form onSubmit={handleEditSubmit}>
                     <input
                         type="text"
                         name="username"
@@ -70,7 +75,7 @@ const AddUser = ({ onClose, onAddSuccess }) => {
                     />
                     <div className="modal-action mt-4">
                         <button onClick={onClose} className="btn">Cancel</button>
-                        <button type="submit" className="btn btn-success">Add</button>
+                        <button type="submit" className="btn btn-success">Save</button>
                     </div>
                 </form>
             </div>
@@ -78,4 +83,4 @@ const AddUser = ({ onClose, onAddSuccess }) => {
     );
 };
 
-export default AddUser;
+export default EditUser;
