@@ -4,40 +4,8 @@ import logo from "../../images/Logo.png";
 import { Link } from "react-router-dom";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import PersonIcon from "@mui/icons-material/Person";
-import axios from "axios"; // To make the POST request
 
 const SignupComp = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [message, setMessage] = useState(""); // For success/failure message
-
-  // Handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    // Create the data object
-    const newUser = { name, email, password };
-
-    try {
-      // Send POST request to the PHP backend
-      const response = await axios.post(
-        "http://localhost/MyPHPWebsite/createnewuser.php", // Update to your actual PHP endpoint
-        newUser
-      );
-
-      // Display success/failure message
-      if (response.data.success) {
-        setMessage("User created successfully!");
-      } else {
-        setMessage(response.data.message);
-      }
-    } catch (error) {
-      setMessage("There was an error creating the user!");
-      console.error("Error:", error);
-    }
-  };
-
   return (
     <div className="signin-form w-full h-full flex justify-center items-center">
       <div className="flex w-full justify-center items-center max-w-[80%] h-screen shadow-2xl relative">
@@ -55,15 +23,13 @@ const SignupComp = () => {
             </p>
 
             {/* Form */}
-            <form className="space-y-5" onSubmit={handleSubmit}>
+            <form className="space-y-5">
               <div className="mb-2">
                 <label className="block text-sm font-medium ml-2" htmlFor="name">
                   Your Name
                 </label>
                 <input
                   type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
                   placeholder="Your Name"
                   className="input input-bordered w-full border-none bg-slate-100 shadow-md rounded-2xl text-primary focus:outline-none focus:shadow-md pl-10"
                 />
@@ -75,8 +41,6 @@ const SignupComp = () => {
                 </label>
                 <input
                   type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="Your Email"
                   className="input input-bordered w-full border-none bg-slate-100 shadow-md rounded-2xl text-primary focus:outline-none focus:shadow-md pl-10"
                 />
@@ -88,8 +52,6 @@ const SignupComp = () => {
                 </label>
                 <input
                   type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="Your Password"
                   className="input input-bordered w-full border-none bg-slate-100 shadow-md rounded-2xl text-primary focus:outline-none focus:shadow-md pl-10"
                 />
@@ -103,13 +65,6 @@ const SignupComp = () => {
                 Sign up
               </button>
             </form>
-
-            {/* Display message */}
-            {message && (
-              <p className="mt-3 text-sm text-center text-red-500">
-                {message}
-              </p>
-            )}
 
             {/* Center the Sign In Link */}
             <p className="mt-3 text-sm text-center">
