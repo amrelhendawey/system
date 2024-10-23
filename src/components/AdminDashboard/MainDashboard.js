@@ -6,7 +6,7 @@ import Nav from "./Nav";
 
 const MainDashboard = ({adminData}) => {
 
-  console.log(adminData)
+
   return (
     <div className="px-1 font-Poppins flex w-full h-screen justify-center  ">
       <SideBar />

@@ -14,7 +14,7 @@ const SideBar = () => {
   const links = [
     { title: "Dashboard", href: "/MainDashboard", icon: DashboardIcon },
     { title: "Stats", href: "/stats", icon: BarChartIcon },
-    { title: "Documents", href: "", icon: InsertDriveFileIcon },
+    { title: "Tickets", href: "/tickets", icon: InsertDriveFileIcon },
     { title: "Photos", href: "", icon: InsertPhotoIcon },
     { title: "Hierarchy", href: "", icon: CleanHandsIcon },
     { title: "Message", href: "/message", icon: MessageIcon },

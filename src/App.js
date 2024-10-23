@@ -8,9 +8,11 @@ import Stats from "./components/Stats/Stats";
 import Messages from "./components/Messages/Messages";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Tickets from "./Tickets/Tickets";
 
 function App() {
   const [adminData, setAdminData] = useState([]);
+  const [tickets, setTickets] = useState([]);
 
   useEffect(() => {
     axios
@@ -21,6 +23,17 @@ function App() {
       })
       .catch((error) => {
         console.error("There was an error fetching the data!", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost/get-tickets.php")
+      .then((response) => {
+        setTickets(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching tickets:", error);
       });
   }, []);
 
@@ -37,6 +50,10 @@ function App() {
           <Route path="/SigninUser" element={<SinginUser />} />
           <Route path="/stats" element={<Stats adminData={adminData} />} />
           <Route path="/message" element={<Messages adminData={adminData} />} />
+          <Route
+            path="/tickets"
+            element={<Tickets tickets={tickets} adminData={adminData} />}
+          />
         </Routes>
       </Router>
     </div>
