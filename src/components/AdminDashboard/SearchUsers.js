@@ -1,9 +1,9 @@
 import React from "react";
-import AddIcon from "@mui/icons-material/Add";
 import TuneIcon from "@mui/icons-material/Tune";
 import SearchIcon from "@mui/icons-material/Search";
+import AddUser from "./AddUser";
 
-const SearchUsers = ({ title , onOpenModal }) => {
+const SearchUsers = ({ title }) => {
 
   return (
     <div className="w-full flex flex-col justify-center items-start space-y-4">
@@ -24,10 +24,7 @@ const SearchUsers = ({ title , onOpenModal }) => {
         {/* BUTTON DIV */}
         <div className="flex items-center space-x-4">
           {/* ADD USER BUTTON */}
-          <button className="btn btn-primary bg-blue-500 text-white hover:bg-blue-600 flex items-center space-x-2"
-            onClick={() => onOpenModal('add')} >
-            <span>Add User</span> <AddIcon />
-          </button>
+          <AddUser />
           {/* FILTER BUTTON */}
           <button className="btn btn-primary text-blue-600 border-[2px] hover:bg-blue-600 hover:text-white flex items-center space-x-2">
             <span>Filter</span> <TuneIcon />
