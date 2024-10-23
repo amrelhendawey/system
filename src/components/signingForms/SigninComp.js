@@ -55,7 +55,7 @@ const SigninComp = () => {
             <p className="text-gray-500 text-sm mb-3">
               Please login to continue to your account.
             </p>
-            {error && <p className="text-red-500 mb-3">{error}</p>}{" "}
+            {error && <p className="text-red-500 mb-3">{error}</p>}
             {/* Display error message */}
             {/* Form */}
             <form className="space-y-5" onSubmit={handleSubmit}>
@@ -103,10 +103,16 @@ const SigninComp = () => {
             </p>
             {/* SWITCH ICONS */}
             <div className="flex justify-center items-center space-x-7 mt-3">
-              <Link to={"/"} className="text-blue-500 bg-gray-200 w-10 h-10 flex justify-center items-center rounded-full hover:text-blue-600">
+              <Link
+                to={"/"}
+                className="text-blue-500 bg-gray-200 w-10 h-10 flex justify-center items-center rounded-full hover:text-blue-600"
+              >
                 <AdminPanelSettingsIcon style={{ fontSize: "35px" }} />
               </Link>
-              <Link to={"/SigninUser"} className="text-blue-500 bg-gray-200 w-10 h-10 flex justify-center items-center rounded-full hover:text-blue-600">
+              <Link
+                to={"/SigninUser"}
+                className="text-blue-500 bg-gray-200 w-10 h-10 flex justify-center items-center rounded-full hover:text-blue-600"
+              >
                 <PersonIcon style={{ fontSize: "35px" }} />
               </Link>
             </div>
