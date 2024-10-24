@@ -1,6 +1,7 @@
 import React from "react";
 import SideBar from "../components/SideBar";
 import Nav from "../components/AdminDashboard/Nav";
+import Reply from "./Reply";
 
 const Tickets = ({ tickets, adminData }) => {
   return (
@@ -12,27 +13,29 @@ const Tickets = ({ tickets, adminData }) => {
           {tickets.map((ticket, index) => (
             <ul
               key={index}
-              className="w-full h-36 space-y-4 shadow-xl rounded-2xl p-2"
+              className="w-full h-full flex items-center space-y-4 shadow-xl rounded-2xl p-2 px-5"
             >
-              {/* Display adminData.username */}
-              <li className="rounded-2xl">
-                <span className="text-xl font-semibold text-blue-500">
-                  From:{" "}
-                </span>
-                {adminData?.username}
-              </li>
-              <li className="rounded-2xl">
-                <span className="text-xl font-semibold text-blue-500">
-                  Subject:{" "}
-                </span>
-                {ticket.subject}
-              </li>
-              <li>
-                <span className="text-xl font-semibold text-blue-500">
-                  Description:{" "}
-                </span>
-                {ticket.description}
-              </li>
+              <div className="w-full h-full space-y-4">
+                <li className="rounded-2xl">
+                  <span className="text-xl font-semibold text-blue-500">
+                    From:{" "}
+                  </span>
+                  {adminData?.username}
+                </li>
+                <li className="rounded-2xl">
+                  <span className="text-xl font-semibold text-blue-500">
+                    Subject:{" "}
+                  </span>
+                  {ticket.subject}
+                </li>
+                <li>
+                  <span className="text-xl font-semibold text-blue-500">
+                    Description:{" "}
+                  </span>
+                  {ticket.description}
+                </li>
+              </div>
+              <Reply />
             </ul>
           ))}
         </div>

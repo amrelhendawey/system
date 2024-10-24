@@ -15,9 +15,9 @@ const SideBar = () => {
     { title: "Dashboard", href: "/MainDashboard", icon: DashboardIcon },
     { title: "Stats", href: "/stats", icon: BarChartIcon },
     { title: "Tickets", href: "/tickets", icon: InsertDriveFileIcon },
+    { title: "Message", href: "/message", icon: MessageIcon },
     { title: "Photos", href: "", icon: InsertPhotoIcon },
     { title: "Hierarchy", href: "", icon: CleanHandsIcon },
-    { title: "Message", href: "/message", icon: MessageIcon },
     { title: "Help", href: "", icon: HelpIcon },
     { title: "Settings", href: "", icon: SettingsIcon },
   ];
@@ -25,7 +25,7 @@ const SideBar = () => {
   const [activeLink, setActiveLink] = useState("Dashboard");
   const navigate = useNavigate();
 
-  const handleActiveLink = (value ,href) => {
+  const handleActiveLink = (value, href) => {
     setActiveLink(value);
     navigate(href);
   };
@@ -46,7 +46,7 @@ const SideBar = () => {
                 className={`flex w-full items-center mb-4 cursor-pointer ${
                   activeLink === link.title ? "text-blue-500" : "text-gray-500"
                 }`}
-                onClick={() => handleActiveLink(link.title ,link.href)}
+                onClick={() => handleActiveLink(link.title, link.href)}
               >
                 <link.icon
                   sx={{
