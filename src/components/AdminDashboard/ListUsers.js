@@ -47,45 +47,47 @@ const ListUsers = ({ adminData = [], setAdminData }) => {
         <h1 className="text-xl font-semibold">List Users</h1>
       </div>
 
-      <div className="overflow-x-auto w-full">
-        <table className="table border-separate border-spacing-0">
-          <thead className="text-xl text-center shadow-md">
-            <tr>
-              <th></th>
-              <th className="font-medium">Username</th>
-              <th className="font-medium">Password</th>
-              <th className="font-medium">Email</th>
-              <th className="font-medium">Gender</th>
-              <th className="font-medium">Action</th>
-            </tr>
-          </thead>
-          <tbody className="w-full">
-            {adminData.map((user) => (
-              <tr
-                className="w-full text-center text-[16px] font-normal space-y-3"
-                key={user.id}
-              >
-                <th>{user.id}</th>
-                <td>{user.username}</td>
-                <td>{user.password}</td>
-                <td>{user.email}</td>
-                <td>{user.gender}</td>
+  return (
+    <div className="overflow-x-auto w-full">
+      <table className="table border-separate border-spacing-0">
+        <thead className="text-xl text-center shadow-md">
+          <tr>
+            <th></th>
+            <th className="font-medium">Username</th>
+            <th className="font-medium">Password</th>
+            <th className="font-medium">Email</th>
+            <th className="font-medium">Gender</th>
+            <th className="font-medium">Action</th>
+          </tr>
+        </thead>
+        <tbody className="w-full">
+          {adminData.map((user) => (
+            <tr
+              className="w-full text-center text-[16px] font-normal space-y-3"
+              key={user.id}
+            >
+              <th>{user.id}</th>
+              <td>{user.username}</td>
+              <td>{user.password}</td>
+              <td>{user.email}</td>
+              <td>{user.gender}</td>
 
-                <td className="flex justify-center space-x-4">
-                  <EditIcon
-                    className="cursor-pointer text-gray-500 hover:text-blue-500"
-                    onClick={() => openEditModal(user)}
-                  />
-                  <DeleteIcon
-                    className="cursor-pointer text-gray-500 hover:text-blue-500"
-                    onClick={() => openDeleteModal(user)}
-                  />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+              <td className="flex justify-center space-x-4">
+                <EditIcon
+                  className="cursor-pointer text-gray-500 hover:text-blue-500"
+                  onClick={() => openEditModal(user)}
+                />
+                <DeleteIcon
+                  className="cursor-pointer text-gray-500 hover:text-blue-500"
+                  onClick={() => openDeleteModal(user)}
+                />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
 
       {isEditModalOpen && selectedUser && (
         <EditUser
@@ -101,7 +103,9 @@ const ListUsers = ({ adminData = [], setAdminData }) => {
           onClose={closeDeleteModal}
           onDelete={handleDelete}
         />
-      )}
+  )
+  }
+    );
     </div>
   );
 };
