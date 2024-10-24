@@ -3,8 +3,7 @@ import TuneIcon from "@mui/icons-material/Tune";
 import SearchIcon from "@mui/icons-material/Search";
 import AddUser from "./AddUser";
 
-const SearchUsers = ({ title }) => {
-
+const SearchUsers = ({ title, setAdminData, adminData }) => {
   return (
     <div className="w-full flex flex-col justify-center items-start space-y-4">
       <h1 className="text-2xl font-semibold text-blue-500">{title}</h1>
@@ -24,7 +23,7 @@ const SearchUsers = ({ title }) => {
         {/* BUTTON DIV */}
         <div className="flex items-center space-x-4">
           {/* ADD USER BUTTON */}
-          <AddUser />
+          <AddUser setAdminData={setAdminData} adminData={adminData} />
           {/* FILTER BUTTON */}
           <button className="btn btn-primary text-blue-600 border-[2px] hover:bg-blue-600 hover:text-white flex items-center space-x-2">
             <span>Filter</span> <TuneIcon />

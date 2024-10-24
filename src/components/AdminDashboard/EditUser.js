@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const EditUser = ({ user, onClose }) => {
+const EditUser = ({ user, onClose, onUpdate }) => {
   const [formData, setFormData] = useState({
     username: user.username,
     password: user.password,
@@ -20,8 +20,8 @@ const EditUser = ({ user, onClose }) => {
         id: user.id, // Include the ID of the user being edited
         ...formData,
       });
+      onUpdate(user.id, formData); // Update the user data in the list
       onClose(); // Close the modal after saving
-      // Optionally, refresh the admin data here
     } catch (error) {
       console.error("Error updating user:", error);
     }

@@ -3,23 +3,12 @@ import axios from "axios";
 
 const DeleteUser = ({ user, onClose, onDelete }) => {
   const handleDelete = async () => {
-    console.log("Attempting to delete user:", user); // Log the user object
     try {
-      const response = await axios.post(
-        "http://localhost/MyPHPWebsite/api/delete.php",
-        {
-          id: user.id, // Include the ID of the user to delete
-        },
-        {
-          headers: {
-            "Content-Type": "application/json", // Specify the content type
-          },
-        }
-      );
-
-      console.log("Delete response:", response.data); // Log the response from the server
+      await axios.post("http://localhost/MyPHPWebsite/api/delete.php", {
+        id: user.id, // Include the ID of the user to delete
+      });
+      onDelete(user.id); // Call the function to update the user list
       onClose(); // Close the modal after deletion
-      // Optionally, refresh the admin data here
     } catch (error) {
       console.error("Error deleting user:", error);
     }

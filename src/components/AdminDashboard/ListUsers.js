@@ -33,6 +33,13 @@ const ListUsers = ({ adminData = [], setAdminData }) => {
       prevAdminData.filter((user) => user.id !== userId)
     );
   };
+  const handleUpdate = (userId, updatedData) => {
+    setAdminData((prevAdminData) =>
+      prevAdminData.map((user) =>
+        user.id === userId ? { ...user, ...updatedData } : user
+      )
+    );
+  };
 
   return (
     <div className="w-full h-full flex flex-col justify-start items-start bg-slate-50 border-[2px] rounded-xl space-y-6 shadow-md">
@@ -81,7 +88,11 @@ const ListUsers = ({ adminData = [], setAdminData }) => {
       </div>
 
       {isEditModalOpen && selectedUser && (
-        <EditUser user={selectedUser} onClose={closeEditModal} />
+        <EditUser
+          user={selectedUser}
+          onClose={closeEditModal}
+          onUpdate={handleUpdate}
+        />
       )}
 
       {isDeleteModalOpen && selectedUser && (

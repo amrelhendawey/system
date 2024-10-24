@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import AddIcon from "@mui/icons-material/Add";
 
-const AddUser = () => {
+const AddUser = ({ adminData, setAdminData }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -18,19 +18,23 @@ const AddUser = () => {
 
   const handleAddSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submitting:", formData); // Log the form data
+    console.log("Submitting:", formData);
     try {
       const response = await axios.post(
         "http://localhost/MyPHPWebsite/api/create.php",
         formData,
         {
           headers: {
-            "Content-Type": "application/json", // Specify the content type
+            "Content-Type": "application/json",
           },
         }
       );
-      console.log("Response:", response.data); // Log the response from the API
-      setIsOpen(false);
+      const newUser = response.data.user; // Assume the response includes the new user data
+      // Update the adminData with the new user
+      setAdminData([...adminData, newUser]);
+
+      console.log("Response:", response.data);
+      setIsOpen(false); // Close the modal after submission
     } catch (error) {
       console.error(
         "Error adding user:",

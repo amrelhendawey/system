@@ -9,7 +9,7 @@ const MainDashboard = ({ adminData , setAdminData }) => {
       <SideBar />
       <div className="w-full flex flex-col justify-between items-center p-10 space-y-5">
         <Nav />
-        <SearchUsers title={"Admin Dashboard"} />
+        <SearchUsers title={"Admin Dashboard"}  adminData ={adminData}  setAdminData={setAdminData} />
         <ListUsers adminData={adminData} setAdminData={setAdminData} />
       </div>
     </div>

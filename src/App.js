@@ -34,7 +34,12 @@ function App() {
           <Route path="/" element={<SigninComp />} />
           <Route
             path="/mainDashboard"
-            element={<MainDashboard adminData={adminData} setAdminData={setAdminData} />}
+            element={
+              <MainDashboard
+                adminData={adminData}
+                setAdminData={setAdminData}
+              />
+            }
           />
           <Route path="/SigninUser" element={<SinginUser />} />
           <Route
