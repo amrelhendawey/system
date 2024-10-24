@@ -31,7 +31,7 @@ function App() {
   useEffect(() => {
     // Fetch tickets
     axios
-      .get("http://localhost/get-tickets.php")
+      .get("http://localhost/MyPHPWebsite/api/get-tickets.php")
       .then((response) => {
         setTickets(response.data);
       })

@@ -3,7 +3,10 @@ import SideBar from "../components/SideBar";
 import Nav from "../components/AdminDashboard/Nav";
 import Reply from "./Reply";
 
-const Tickets = ({ tickets, adminData }) => {
+const Tickets = ({ tickets = [], adminData }) => {
+  if (!Array.isArray(tickets)) {
+    return <div>Error: Tickets data is not an array.</div>;
+}
   return (
     <div className="px-1 font-Poppins flex w-full h-screen justify-center">
       <SideBar />
